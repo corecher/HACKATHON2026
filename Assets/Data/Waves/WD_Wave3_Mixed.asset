@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dda3354ff48f4be8978ebd629f8b0bc, type: 3}
+  m_Name: WD_Wave3_Mixed
+  m_EditorClassIdentifier: Assembly-CSharp::WaveSpawnerTemplate.Wave.WaveData
+  waveName: Wave 3 - Mixed (Timed)
+  entries:
+  - spawnableData: {fileID: 11400000, guid: fc52c8d036fe64bbcac4853fe402c984, type: 2}
+    count: 3
+  - spawnableData: {fileID: 11400000, guid: 211879a26c3884356adcecf08d18d85f, type: 2}
+    count: 3
+  - spawnableData: {fileID: 11400000, guid: 1db8f9129b83941aa9cc9168c4f1d47c, type: 2}
+    count: 3
+  spawnInterval: 0.4
+  endCondition: 1
+  fixedDuration: 8
