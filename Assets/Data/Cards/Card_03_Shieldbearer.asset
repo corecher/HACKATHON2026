@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d805bd289fff84299ac3cc5c0219cbff, type: 3}
+  m_Name: Card_03_Shieldbearer
+  m_EditorClassIdentifier: Assembly-CSharp::CardGameTemplate.Card.CardData
+  cardId: card_003
+  cardName: Shieldbearer
+  description: "Shieldbearer \uC0D8\uD50C \uCE74\uB4DC (\uD15C\uD50C\uB9BF \uD14C\uC2A4\uD2B8\uC6A9)"
+  icon: {fileID: 3196939335510705326, guid: dc78ed9556912494992fdd3411c5b8bb, type: 2}
+  cost: 3
+  power: 1
