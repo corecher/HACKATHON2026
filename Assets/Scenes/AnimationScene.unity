@@ -599,6 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038f39a8d2b75cc4cad4dcd03d8c6223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  scorePerSurvivalSecond: 15
 --- !u!4 &648025641
 Transform:
   m_ObjectHideFlags: 0

@@ -129,6 +129,7 @@ public class PatternManager : Singleton<PatternManager>
         lastPattern = null;
         spawnQueue.Clear();
         activePatterns.Clear();
+        GameManager.Instance?.BeginSurvivalRun();
         StartCoroutine(CoRunPatterns());
         StartCoroutine(CoTickSurvival());
         StartCoroutine(CoProcessSpawnQueue());
