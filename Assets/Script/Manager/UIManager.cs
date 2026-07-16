@@ -27,7 +27,7 @@ public class UIManager : Singleton<UIManager>
         if (fadeImage != null)
         {
             fadeImage.gameObject.SetActive(true);
-            FadeIn(1.0f); // 1초 동안 페이드 인
+            FadeIn(5.0f); // 1초 동안 페이드 인
         }
     }
 
