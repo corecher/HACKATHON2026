@@ -119,6 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &178198560
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +301,8 @@ RectTransform:
   m_AnchoredPosition: {x: 790.8, y: -309.3}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+=======
+>>>>>>> parent of 7f38c21 (이미지 적용)
 --- !u!1 &636479102
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76293d53f2e636442b9261b76fb73fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableBed
-  interactionUI: {fileID: 539273695}
+  interactionUI: {fileID: 0}
 --- !u!61 &746540943
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -534,17 +537,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.39661598, y: 0.1529659}
+  m_Offset: {x: -0.051679015, y: 0.2359829}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 9.68, y: 5.5}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 11.563585, y: 6.95113}
+  m_Size: {x: 1.1033576, y: 1.4719658}
   m_EdgeRadius: 0
 --- !u!212 &746540944
 SpriteRenderer:
@@ -595,7 +598,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -5994363178801206791, guid: 49293ce7e9506a7499f594f4f15116a4, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -614,6 +617,7 @@ Transform:
   m_GameObject: {fileID: 746540941}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: 5.27, y: -3.18, z: 0}
   m_LocalScale: {x: -0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
@@ -695,6 +699,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+=======
+  m_LocalPosition: {x: 4.63, y: -3.67, z: 0}
+  m_LocalScale: {x: 4.1858, y: 1, z: 1}
+>>>>>>> parent of 7f38c21 (이미지 적용)
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1064,5 +1072,8 @@ SceneRoots:
   - {fileID: 1549006207}
   - {fileID: 1949328785}
   - {fileID: 746540945}
+<<<<<<< HEAD
   - {fileID: 178198561}
   - {fileID: 1435434974}
+=======
+>>>>>>> parent of 7f38c21 (이미지 적용)
