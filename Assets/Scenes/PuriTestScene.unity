@@ -350,6 +350,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 0}
   clearPanel: {fileID: 507223800}
   fadeImage: {fileID: 702634795}
+  defaultFadeInDuration: 1.5
   clearHoldDuration: 1.5
   clearFadeDuration: 1
   clearNextSceneName: PuriTestScene
@@ -634,8 +635,8 @@ Transform:
   m_GameObject: {fileID: 774409124}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 18, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -7, z: 0}
+  m_LocalScale: {x: 30, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -969,7 +970,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1235,10 +1236,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1cea76de8c714dd4961793f8c583d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBounds
-  floorY: -2.5
-  ceilingY: 5
-  leftX: -6.666667
-  rightX: 6.666667
+  floorY: -6
+  ceilingY: 8
+  leftX: -14.2
+  rightX: 14.2
   floorReference: {fileID: 0}
   ceilingReference: {fileID: 0}
   leftReference: {fileID: 0}
@@ -1292,8 +1293,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 6
-  minX: -8
-  maxX: 8
+  minX: -14.2
+  maxX: 14.2
   jumpForce: 18
   groundCheck: {fileID: 810301525}
   groundCheckRadius: 0.1
@@ -1442,7 +1443,7 @@ Transform:
   m_GameObject: {fileID: 1813652907}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -11.1, y: -3.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
