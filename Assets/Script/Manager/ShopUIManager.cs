@@ -114,19 +114,28 @@ public class ShopUIManager : MonoBehaviour
         moneyText.text = $"보유 코인: {GameManager.Instance.money}";
 
         // 1. 파괴력 정보 갱신 (만렙 없음)
-        destructionLevelText.text = $"파괴력 (Lv.{GameManager.Instance.destructionLevel})";
-        destructionCostText.text = $"{GameManager.Instance.CostDestruction} 코인";
-
+        if (GameManager.Instance.destructionLevel >= 5)
+        {
+            destructionLevelText.text = "몽유 조작(MAX)";
+            destructionCostText.text = "-";
+            destructionBuyButton.interactable = false; // 만렙이면 버튼 비활성화
+        }
+        else
+        {
+            destructionLevelText.text = $"몽유 조작\n(Lv.{GameManager.Instance.destructionLevel}/5)";
+            destructionCostText.text = $"{GameManager.Instance.CostDestruction} 코인";
+            destructionBuyButton.interactable = true;
+        }
         // 3. 단련 정보 갱신 (만렙 5)
         if (GameManager.Instance.fortitudeLevel >= 5)
         {
-            fortitudeLevelText.text = "단련 (MAX)";
+            fortitudeLevelText.text = "수면제(MAX)";
             fortitudeCostText.text = "-";
             fortitudeBuyButton.interactable = false; // 만렙이면 버튼 비활성화
         }
         else
         {
-            fortitudeLevelText.text = $"단련 (Lv.{GameManager.Instance.fortitudeLevel}/5)";
+            fortitudeLevelText.text = $"수면제\n(Lv.{GameManager.Instance.fortitudeLevel}/5)";
             fortitudeCostText.text = $"{GameManager.Instance.CostFortitude} 코인";
             fortitudeBuyButton.interactable = true;
         }
@@ -134,13 +143,13 @@ public class ShopUIManager : MonoBehaviour
         // 4. 재생 정보 갱신 (만렙 5)
         if (GameManager.Instance.regenLevel >= 5)
         {
-            regenLevelText.text = "재생 (MAX)";
+            regenLevelText.text = "수면질 향상(MAX)";
             regenCostText.text = "-";
             regenBuyButton.interactable = false; // 만렙이면 버튼 비활성화
         }
         else
         {
-            regenLevelText.text = $"재생 (Lv.{GameManager.Instance.regenLevel}/5)";
+            regenLevelText.text = $"수면질 향상\n(Lv.{GameManager.Instance.regenLevel}/5)";
             regenCostText.text = $"{GameManager.Instance.CostRegen} 코인";
             regenBuyButton.interactable = true;
         }
@@ -148,13 +157,13 @@ public class ShopUIManager : MonoBehaviour
         // 5. 도약 정보 갱신 (만렙 1)
         if (GameManager.Instance.leapLevel >= 1)
         {
-            leapLevelText.text = "도약 (MAX)";
+            leapLevelText.text = "가위 눌림 해제됨";
             leapCostText.text = "-";
             leapBuyButton.interactable = false; // 만렙이면 버튼 비활성화
         }
         else
         {
-            leapLevelText.text = $"도약 (Lv.0/1)"; // 최대 1레벨이므로 0/1로 표기
+            leapLevelText.text = $"가위 눌림 해제"; // 최대 1레벨이므로 0/1로 표기
             leapCostText.text = $"{GameManager.Instance.CostLeap} 코인";
             leapBuyButton.interactable = true;
         }

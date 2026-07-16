@@ -97,7 +97,7 @@ public class GameManager : Singleton<GameManager>
     public bool BuyDestruction()
     {
         // 현재 가진 돈이 업그레이드 비용보다 많거나 같다면
-        if (money >= CostDestruction)
+        if (destructionLevel < 5&&money >= CostDestruction)
         {
             // 돈을 차감합니다.
             money -= CostDestruction;
