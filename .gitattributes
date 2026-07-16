@@ -1,0 +1,16 @@
+# 텍스트 파일 줄바꿈 정규화 (한글 파일명/내용 자체는 git이 항상 UTF-8 바이트 그대로 저장함)
+* text=auto eol=lf
+
+*.cs text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.unity text eol=lf
+*.prefab text eol=lf
+*.asset text eol=lf
+*.meta text eol=lf
+
+# 바이너리 (diff/변환 시도 금지)
+*.png binary
+*.ttf binary
+*.ttc binary
+*.otf binary
