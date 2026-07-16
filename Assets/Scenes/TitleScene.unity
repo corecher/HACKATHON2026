@@ -1279,7 +1279,7 @@ MonoBehaviour:
   defaultFadeInDuration: 1.5
   clearHoldDuration: 1.5
   clearFadeDuration: 1
-  clearNextSceneName: PuriTestScene
+  clearNextSceneName: ClearScene
 --- !u!114 &1294950403
 MonoBehaviour:
   m_ObjectHideFlags: 0
