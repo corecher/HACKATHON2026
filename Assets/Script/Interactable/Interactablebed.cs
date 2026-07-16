@@ -21,6 +21,6 @@ public class InteractableBed : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        Debug.Log("침대와 상호작용함");
+        
     }
 }
