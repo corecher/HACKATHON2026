@@ -642,7 +642,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 554acaca3071fbf45aee0c229626066e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  readyPanel: {fileID: 0}
+  ingamePanel: {fileID: 0}
+  pausePanel: {fileID: 0}
+  gameOverPanel: {fileID: 0}
+  clearPanel: {fileID: 0}
   fadeImage: {fileID: 0}
+  clearHoldDuration: 1.5
+  clearFadeDuration: 1
+  clearNextSceneName: PuriTestScene
 --- !u!114 &391923354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1039,7 +1047,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: TestScene
+          m_StringArgument: PuriTestScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &868259163

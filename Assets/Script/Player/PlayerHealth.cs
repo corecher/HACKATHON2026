@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -93,6 +94,13 @@ public class PlayerHealth : MonoBehaviour
         if (CurrentHearts <= 0)
         {
             GameManager.Instance.ChangeState(GameState.GameOver);
+            
+            // [수정] FadeOut이 끝난 뒤(onComplete 콜백) 실행할 코드를 람다식(() => {})으로 전달합니다.
+            UIManager.Instance.FadeOut(2f, () => 
+            {
+                SceneManager.LoadScene("StoreScene");
+            });
+            
             return;
         }
 
