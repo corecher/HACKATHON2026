@@ -52,8 +52,8 @@ public class GameManager : Singleton<GameManager>
         // 상점 테스트를 위해 임시로 돈을 지급합니다. (실제 게임 출시 전에는 지워야 합니다)
         money = 5000; 
         
-        // 게임 상태를 '준비(Ready)' 상태로 전환합니다.
-        ChangeState(GameState.Ready);
+        // 플레이어 이동 테스트를 위해 임시로 Playing 상태로 시작합니다. (테스트 끝나면 Ready로 되돌릴 것)
+        ChangeState(GameState.Playing);
     }
 
     // 게임 상태를 변경하는 메서드입니다.
