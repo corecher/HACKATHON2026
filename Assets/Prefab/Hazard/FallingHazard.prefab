@@ -84,8 +84,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1843197933104017171, guid: ca1913d4f4ac84d6590922ef132ba735, type: 3}
-  m_Color: {r: 0.85, g: 0.2, b: 0.9, a: 1}
+  m_Sprite: {fileID: 2925581405129937203, guid: b7f97b9dfb0494fb3a914c8607d7d192, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -107,9 +107,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FallingHazard
   lifeTime: 5
-  offScreenMargin: 0.2
+  outOfBoundsMargin: 1
+  outOfBoundsGracePeriod: 0.2
   fallSpeed: 6
   driftSpeed: 0
+  lingerAfterLandDuration: 0
 --- !u!61 &1156285855704766081
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144,17 +146,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.011153638, y: -0.016730249}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.38483146, y: 1.3735955}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.4423219, y: 1.4349891}
   m_EdgeRadius: 0
 --- !u!50 &1249036671095113445
 Rigidbody2D:
