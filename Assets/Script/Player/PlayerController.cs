@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.RenderGraphModule;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("애니메이터")]
     public Animator animator;
+    public SpriteRenderer renderer;
 
     private Rigidbody2D rb;
     private float moveInput;
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (renderer == null) renderer = GetComponent<SpriteRenderer>();
         if (animator == null) animator = GetComponent<Animator>();
     }
 
@@ -41,7 +44,9 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        moveInput = Input.GetAxisRaw("Horizontal"); // 기본 Input Manager: A/D, 좌우 화살표
+        moveInput = Input.GetAxisRaw("Horizontal"); // 기본 Input Manager: A/D, 좌우 화살표        
+        animator.SetBool("Running", (moveInput != 0f));
+        renderer.flipX = (moveInput < 0)  ? true : false;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
