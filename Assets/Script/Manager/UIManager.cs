@@ -5,24 +5,12 @@ using System;
 
 public class UIManager : Singleton<UIManager>
 {
-    [Header("UI Panels")]
-    public GameObject readyPanel;
-    public GameObject ingamePanel;
-    public GameObject pausePanel;
-    public GameObject gameOverPanel;
-
     [Header("Fade Effect")]
     [SerializeField] private Image fadeImage; // 에디터에서 페이드용 이미지 드래그 앤 드롭
     private Coroutine fadeCoroutine;
 
     void Start()
     {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.OnStateChanged += UpdateUI;
-            UpdateUI(GameManager.Instance.CurrentState);
-        }
-
         // 시작할 때 페이드 인 (화면이 검은색에서 서서히 밝아짐)
         if (fadeImage != null)
         {
@@ -31,15 +19,6 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    public void UpdateUI(GameState state)
-    {
-        if (readyPanel) readyPanel.SetActive(state == GameState.Ready);
-        if (ingamePanel) ingamePanel.SetActive(state == GameState.Playing);
-        if (pausePanel) pausePanel.SetActive(state == GameState.Pause);
-        if (gameOverPanel) gameOverPanel.SetActive(state == GameState.GameOver);
-    }
-
-    #region Fade Functions
 
     // 화면이 서서히 밝아지는 기능 (검은 화면 -> 투명 화면)
     public void FadeIn(float duration, Action onComplete = null)
@@ -92,12 +71,4 @@ public class UIManager : Singleton<UIManager>
 
         onComplete?.Invoke();
     }
-
-    #endregion
-
-    // 버튼 연결용 함수 예시
-    public void ClickStartButton() => GameManager.Instance.ChangeState(GameState.Playing);
-    public void ClickPauseButton() => GameManager.Instance.ChangeState(GameState.Pause);
-    public void ClickResumeButton() => GameManager.Instance.ChangeState(GameState.Playing);
-    public void ClickRestartButton() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
 }
