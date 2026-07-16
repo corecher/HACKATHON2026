@@ -176,7 +176,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   animator: {fileID: 1508201729}
-  renderer: {fileID: 1508201728}
 --- !u!61 &44816716
 BoxCollider2D:
   m_ObjectHideFlags: 0
