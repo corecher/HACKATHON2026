@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6777924664466918962}
   - component: {fileID: 5118283546403499159}
+  - component: {fileID: 3581934940053420844}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -91,3 +92,17 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &3581934940053420844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4654626817823889348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2677c051306dbe54eb48e32952ace48a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MirrorFragment
+  lifetime: 5
+  minVisibleGrace: 0.05

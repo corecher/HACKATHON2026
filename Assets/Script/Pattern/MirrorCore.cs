@@ -7,6 +7,7 @@ public class MirrorCore : MonoBehaviour
     [SerializeField] private int fragmentCount = 8;
     [SerializeField] private float fragmentSpeed = 5f;
     [SerializeField] private float delayBeforeShatter = 1.5f;
+    [SerializeField] private float lineLength = 15f;
 
     private LineRenderer lineRenderer;
 
@@ -24,7 +25,7 @@ public class MirrorCore : MonoBehaviour
     {
         DrawWarningLines();
         yield return new WaitForSeconds(delayBeforeShatter);
-        
+
         if (lineRenderer != null)
         {
             lineRenderer.positionCount = 0;
@@ -40,14 +41,14 @@ public class MirrorCore : MonoBehaviour
 
         lineRenderer.positionCount = fragmentCount * 2;
         float angleStep = 360f / fragmentCount;
+        Vector3 origin = transform.position;
 
         for (int i = 0; i < fragmentCount; i++)
         {
-            float angle = i * angleStep;
-            Vector3 direction = Quaternion.Euler(0, 0, angle) * Vector3.right;
-            Vector3 targetPosition = transform.position + direction * 15f;
+            Vector3 direction = Quaternion.Euler(0f, 0f, i * angleStep) * Vector3.right;
+            Vector3 targetPosition = origin + direction * lineLength;
 
-            lineRenderer.SetPosition(i * 2, transform.position);
+            lineRenderer.SetPosition(i * 2, origin);
             lineRenderer.SetPosition(i * 2 + 1, targetPosition);
         }
     }
@@ -55,15 +56,15 @@ public class MirrorCore : MonoBehaviour
     private void Shatter()
     {
         float angleStep = 360f / fragmentCount;
+        Vector3 spawnPos = transform.position;
 
         for (int i = 0; i < fragmentCount; i++)
         {
-            float angle = i * angleStep;
-            Vector3 direction = Quaternion.Euler(0, 0, angle) * Vector3.right;
+            Vector3 direction = Quaternion.Euler(0f, 0f, i * angleStep) * Vector3.right;
 
-            GameObject fragment = Instantiate(fragmentPrefab, transform.position, Quaternion.identity);
+            GameObject fragment = Instantiate(fragmentPrefab, spawnPos, Quaternion.identity);
             MirrorFragment fragmentScript = fragment.GetComponent<MirrorFragment>();
-            
+
             if (fragmentScript != null)
             {
                 fragmentScript.SetDirectionAndSpeed(direction, fragmentSpeed);
