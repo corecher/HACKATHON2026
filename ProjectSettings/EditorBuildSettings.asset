@@ -8,6 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+<<<<<<< HEAD
   - enabled: 1
     path: Assets/Scenes/StoreScene.unity
     guid: 909296d950da9d842abd20eed4d28da5
@@ -23,6 +24,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PuriTestScene.unity
     guid: 392319427a2e34c319b798354bf485e4
+=======
+>>>>>>> parent of 26eaeab (Merge branch 'Test' into KaiTest)
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
