@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 public class InteractableBed : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject interactionUI;
@@ -22,6 +21,6 @@ public class InteractableBed : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        SceneManager.LoadScene("PuriTestScene");
+        Debug.Log("침대와 상호작용함");
     }
 }

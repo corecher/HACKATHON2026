@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -94,7 +93,6 @@ public class PlayerHealth : MonoBehaviour
         if (CurrentHearts <= 0)
         {
             GameManager.Instance.ChangeState(GameState.GameOver);
-            SceneManager.LoadScene("StoreScene");
             return;
         }
 
