@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 
 // 게임의 현재 진행 상태를 정의하는 열거형(Enum)입니다.
-public enum GameState { Ready, Playing, Pause, GameOver }
+public enum GameState { Ready, Playing, Pause, GameOver, Clear }
 
 // 싱글톤 패턴을 사용하여 게임 내에서 단 하나의 인스턴스만 존재하도록 관리하는 매니저 클래스입니다.
 public class GameManager : Singleton<GameManager>
@@ -13,11 +13,9 @@ public class GameManager : Singleton<GameManager>
     // 게임 상태가 변경될 때마다 호출되는 이벤트입니다. UI 업데이트나 이펙트 실행 등에 쓰입니다.
     public event Action<GameState> OnStateChanged;
 
-    [Header("재화 및 점수")]
-    // 현재 플레이 중인 게임의 점수입니다.
-    public int score { get; private set; }
-    // 역대 최고 점수입니다.
-    public int bestScore { get; private set; }
+    [Header("재화 및 최고 생존시간")]
+    // 역대 최고 생존시간(초)입니다.
+    public float bestSurvivalTime { get; private set; }
     // 플레이어가 보유한 현재 재화(코인/돈)입니다.
     public int money { get; private set; }
 
@@ -43,12 +41,9 @@ public class GameManager : Singleton<GameManager>
     
     void Start()
     {
-        // 게임 시작 시 현재 점수를 0으로 초기화합니다.
-        score = 0; 
-        
-        // 기기에 저장되어 있는 최고 점수를 불러옵니다. 저장된 값이 없다면 0을 가져옵니다.
-        bestScore = PlayerPrefs.GetInt("BestScore", 0);
-        
+        // 기기에 저장되어 있는 최고 생존시간을 불러옵니다. 저장된 값이 없다면 0을 가져옵니다.
+        bestSurvivalTime = PlayerPrefs.GetFloat("BestSurvivalTime", 0f);
+
         // 상점 테스트를 위해 임시로 돈을 지급합니다. (실제 게임 출시 전에는 지워야 합니다)
         money = 5000; 
         
@@ -66,21 +61,17 @@ public class GameManager : Singleton<GameManager>
         OnStateChanged?.Invoke(newState);
     }
 
-    // 점수를 증가시키는 메서드입니다. 몬스터 처치나 아이템 획득 시 호출합니다.
-    public void AddScore(int amount)
+    // 현재 생존시간을 보고받아 최고 기록을 갱신하는 메서드입니다. PatternManager가 매 틱 호출합니다.
+    public void ReportSurvivalTime(float time)
     {
-        // 게임이 '플레이 중(Playing)' 상태가 아니라면 점수가 오르지 않도록 막아줍니다.
+        // 게임이 '플레이 중(Playing)' 상태가 아니라면 갱신하지 않습니다.
         if (CurrentState != GameState.Playing) return;
-        
-        // 점수를 추가합니다.
-        score += amount;
 
-        // 방금 획득한 점수를 더해 최고 점수를 경신했는지 확인합니다.
-        if (score > bestScore)
+        if (time > bestSurvivalTime)
         {
-            bestScore = score;
-            // 경신된 최고 점수를 기기에 바로 저장하여 게임을 껐다 켜도 유지되게 합니다.
-            PlayerPrefs.SetInt("BestScore", bestScore);
+            bestSurvivalTime = time;
+            // 경신된 최고 생존시간을 기기에 바로 저장하여 게임을 껐다 켜도 유지되게 합니다.
+            PlayerPrefs.SetFloat("BestSurvivalTime", bestSurvivalTime);
         }
     }
 
