@@ -158,6 +158,7 @@ GameObject:
   - component: {fileID: 5871810772183647739}
   - component: {fileID: 2814284029196909982}
   - component: {fileID: 5114732283957941904}
+  - component: {fileID: 4271958360128475291}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -293,3 +294,22 @@ MonoBehaviour:
   invincibleDuration: 1.5
   blinkInterval: 0.1
   spriteRenderer: {fileID: 3318511428538857573}
+--- !u!114 &4271958360128475291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8674390930785916283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e369175222ce345859a3c441a22e7873, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerExplosionAttack
+  cooldownTime: 3
+  baseMaxRadius: 2
+  radiusPerLevel: 0.5
+  burstDuration: 0.2
+  effectSprite: {fileID: -6231044458718751821, guid: f5033a056413445958eb6d5f09b98212, type: 3}
+  effectColor: {r: 1, g: 0.8, b: 0.2, a: 0.6}
+  effectSortingOrder: 20
