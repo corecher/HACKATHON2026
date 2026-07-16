@@ -29,6 +29,7 @@ namespace WaveSpawnerTemplate.Pooling
 
         private void Awake()
         {
+            // 씬에 하나만 있어야 하는 싱글턴 - 중복되면 나중 것을 파괴
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
@@ -36,9 +37,11 @@ namespace WaveSpawnerTemplate.Pooling
             }
 
             Instance = this;
+            // 풀링된(비활성) 오브젝트들을 하이어라키에서 한 곳에 모아두기 위한 부모
             poolRoot = new GameObject("PoolRoot").transform;
             poolRoot.SetParent(transform);
 
+            // 인스펙터에 미리 등록해둔 프리팹들은 씬 시작하자마자 풀을 만들어둠 (런타임 첫 스폰 때 지연 없도록)
             foreach (PoolPreset preset in presets)
             {
                 if (preset.prefab != null)
@@ -51,6 +54,7 @@ namespace WaveSpawnerTemplate.Pooling
         /// 프리팹에 대한 풀을 명시적으로 등록 (이미 등록되어 있으면 무시)
         public void RegisterPool(GameObject prefab, int initialSize, int maxSize)
         {
+            // 이미 등록된 프리팹이면 중복 생성 방지
             if (prefab == null || pools.ContainsKey(prefab))
             {
                 return;
@@ -67,6 +71,7 @@ namespace WaveSpawnerTemplate.Pooling
                 return null;
             }
 
+            // 미리 등록 안 해둔 프리팹이어도 여기서 즉석으로 풀을 만들어 사용 - 프리셋 등록을 깜빡해도 동작은 함
             if (!pools.TryGetValue(prefab, out ObjectPool pool))
             {
                 RegisterPool(prefab, defaultInitialSize, defaultMaxSize);
@@ -84,6 +89,7 @@ namespace WaveSpawnerTemplate.Pooling
                 return;
             }
 
+            // PooledObjectTag로 원본 프리팹을 역추적해서 맞는 풀에 반환. 태그가 없거나 풀을 못 찾으면 그냥 파괴
             if (obj.TryGetComponent(out PooledObjectTag tag) && pools.TryGetValue(tag.SourcePrefab, out ObjectPool pool))
             {
                 pool.Release(obj);
@@ -93,6 +99,7 @@ namespace WaveSpawnerTemplate.Pooling
                 Destroy(obj);
             }
 
+            // 풀로 돌아갔든 파괴됐든 "반환됨" 이벤트는 항상 발생 - WaveSpawner가 생존 개체 수 추적에 사용
             OnReleased?.Invoke(obj);
         }
     }

@@ -18,8 +18,11 @@ namespace WaveSpawnerTemplate.Pooling
             this.maxSize = maxSize;
             this.poolParent = poolParent;
 
+            // maxSize가 설정돼있으면 그 이상 미리 만들지 않도록 initialSize를 제한 (0 이하 = 무제한이라 그대로 사용)
             int warmupCount = maxSize > 0 ? Mathf.Min(initialSize, maxSize) : initialSize;
 
+            // 생성자에서 미리 initialSize만큼 만들어두고 비활성 상태로 큐에 넣음
+            // (런타임 중 Instantiate 스파이크를 피하려고 미리 "워밍업"하는 것)
             for (int i = 0; i < warmupCount; i++)
             {
                 GameObject obj = CreateNew();
@@ -45,6 +48,7 @@ namespace WaveSpawnerTemplate.Pooling
 
             if (pool.Count > 0)
             {
+                // 이미 만들어둔 비활성 오브젝트가 있으면 그걸 재사용 (Instantiate 비용 없음)
                 obj = pool.Dequeue();
             }
             else
@@ -56,6 +60,7 @@ namespace WaveSpawnerTemplate.Pooling
             obj.transform.SetPositionAndRotation(position, rotation);
             obj.SetActive(true);
 
+            // IPoolable을 구현한 컴포넌트가 있으면 "방금 스폰됐다"는 걸 알려줘서 상태 초기화 기회를 줌
             if (obj.TryGetComponent(out IPoolable poolable))
             {
                 poolable.OnSpawned();
@@ -67,13 +72,14 @@ namespace WaveSpawnerTemplate.Pooling
         /// 오브젝트를 비활성화하고 풀로 반환
         public void Release(GameObject obj)
         {
+            // 비활성화되기 전에 정리할 기회를 줌 (진행 중이던 코루틴/타이머 등)
             if (obj.TryGetComponent(out IPoolable poolable))
             {
                 poolable.OnDespawned();
             }
 
             obj.SetActive(false);
-            pool.Enqueue(obj);
+            pool.Enqueue(obj); // 다음 Get() 호출 때 재사용되도록 다시 큐에 넣음
         }
     }
 }

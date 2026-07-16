@@ -43,6 +43,7 @@ namespace WaveSpawnerTemplate.Wave
         {
             int total = 0;
 
+            // 항목별 개수를 다 더함 (FixedDuration 모드에선 실제 스폰 수와 다를 수 있음 - 진행률 표시 등 참고용)
             foreach (WaveEntry entry in entries)
             {
                 total += entry.Count;

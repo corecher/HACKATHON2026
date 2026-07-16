@@ -24,8 +24,10 @@ namespace WaveSpawnerTemplate.Spawning
         /// 카테고리 조건을 만족하는 스폰 지점 중 전략에 따라 하나를 선택
         public SpawnPoint SelectSpawnPoint(SpawnableCategory category)
         {
+            // 매번 새 리스트 만들지 않고 재사용 버퍼를 비우고 다시 채움 (매 스폰마다 호출되므로 GC 할당 줄이기용)
             candidateBuffer.Clear();
 
+            // 이 카테고리를 받아들이는 스폰 지점만 후보로 추림
             foreach (SpawnPoint point in spawnPoints)
             {
                 if (point != null && point.CanSpawn(category))
@@ -34,6 +36,7 @@ namespace WaveSpawnerTemplate.Spawning
                 }
             }
 
+            // 후보가 하나도 없으면(전부 카테고리 필터에 걸림) 스폰할 곳이 없다는 뜻
             if (candidateBuffer.Count == 0)
             {
                 return null;
@@ -42,10 +45,12 @@ namespace WaveSpawnerTemplate.Spawning
             switch (strategy)
             {
                 case SpawnSelectionStrategy.Random:
+                    // 매번 무작위로 하나 선택
                     return candidateBuffer[Random.Range(0, candidateBuffer.Count)];
 
                 case SpawnSelectionStrategy.Sequential:
                     {
+                        // 순서대로 진행하되 끝에 도달하면 더 안 넘어가고 마지막 지점에 고정
                         int index = Mathf.Min(nextIndex, candidateBuffer.Count - 1);
                         nextIndex = Mathf.Min(nextIndex + 1, candidateBuffer.Count - 1);
                         return candidateBuffer[index];
@@ -53,6 +58,7 @@ namespace WaveSpawnerTemplate.Spawning
 
                 case SpawnSelectionStrategy.RoundRobin:
                     {
+                        // 나머지 연산으로 처음으로 돌아가며 계속 순환
                         int index = nextIndex % candidateBuffer.Count;
                         nextIndex++;
                         return candidateBuffer[index];

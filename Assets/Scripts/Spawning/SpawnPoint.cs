@@ -13,11 +13,13 @@ namespace WaveSpawnerTemplate.Spawning
         /// 이 스폰 지점이 해당 카테고리를 스폰할 수 있는지 여부
         public bool CanSpawn(SpawnableCategory category)
         {
+            // 필터링 자체를 안 쓰면 뭐든 다 허용
             if (!restrictByCategory)
             {
                 return true;
             }
 
+            // 필터링 켜져있으면 허용 목록에 있는 카테고리만 통과
             foreach (SpawnableCategory allowed in allowedCategories)
             {
                 if (allowed == category)
