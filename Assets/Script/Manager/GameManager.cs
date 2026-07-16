@@ -19,6 +19,9 @@ public class GameManager : Singleton<GameManager>
     // 플레이어가 보유한 현재 재화(코인/돈)입니다.
     public int money { get; private set; }
 
+    [Header("생존 점수")]
+    public int scorePerSurvivalSecond = 15;
+
     [Header("상점 강화 레벨")]
     // 각 능력치의 강화 단계를 나타내는 변수들입니다.
     public int destructionLevel { get; private set; } = 0; // 파괴력
@@ -39,11 +42,11 @@ public class GameManager : Singleton<GameManager>
     public int playerDamage => 10 + destructionLevel;            // 기본 데미지 10 + 파괴력 레벨
     public bool canDoubleJump => leapLevel > 0;                  // 도약 레벨이 1 이상이면 더블 점프 가능(true)
 
+    private float lastRewardedSurvivalTime;
+    private float pendingScore;
+
     void Start()
     {
-        // 상점 테스트를 위해 임시로 돈을 지급합니다. (실제 게임 출시 전에는 지워야 합니다)
-        money = 5000;
-
         // 플레이어 이동 테스트를 위해 임시로 Playing 상태로 시작합니다. (테스트 끝나면 Ready로 되돌릴 것)
         ChangeState(GameState.Playing);
     }
@@ -58,7 +61,13 @@ public class GameManager : Singleton<GameManager>
         OnStateChanged?.Invoke(newState);
     }
 
-    // 현재 생존시간을 보고받아 최고 기록을 갱신하는 메서드입니다. PatternManager가 매 틱 호출합니다.
+    public void BeginSurvivalRun()
+    {
+        lastRewardedSurvivalTime = 0f;
+        pendingScore = 0f;
+    }
+
+    // 현재 생존시간을 보고받아 최고 기록과 재화를 갱신하는 메서드입니다. PatternManager가 매 틱 호출합니다.
     public void ReportSurvivalTime(float time)
     {
         // 게임이 '플레이 중(Playing)' 상태가 아니라면 갱신하지 않습니다.
@@ -68,6 +77,16 @@ public class GameManager : Singleton<GameManager>
         {
             bestSurvivalTime = time;
         }
+
+        float deltaTime = Mathf.Max(0f, time - lastRewardedSurvivalTime);
+        lastRewardedSurvivalTime = time;
+        pendingScore += deltaTime * scorePerSurvivalSecond;
+
+        int earned = Mathf.FloorToInt(pendingScore);
+        if (earned <= 0) return;
+
+        pendingScore -= earned;
+        AddMoney(earned);
     }
 
     // 재화(돈)를 증가시키는 메서드입니다.
