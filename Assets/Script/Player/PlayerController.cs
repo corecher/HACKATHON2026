@@ -79,7 +79,27 @@ public class PlayerController : MonoBehaviour
             jumpRequested = false;
         }
 
-        Vector2 pos = rb.position;
+        if(rb.linearVelocityY > 0f)
+        {
+            animator.SetBool("Jumping", true);
+        }
+        else
+        {
+            animator.SetBool("Jumping", false);
+
+        }
+
+        if (rb.linearVelocityY < 0f)
+        {
+            animator.SetBool("Falling", true);
+        }
+        else
+        {
+            animator.SetBool("Falling", false);
+        }
+
+
+            Vector2 pos = rb.position;
         pos.x = Mathf.Clamp(pos.x, minX, maxX);
         rb.position = pos;
     }
