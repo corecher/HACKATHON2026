@@ -4,6 +4,9 @@ using System;
 <<<<<<< HEAD
 =======
 // 게임의 현재 진행 상태를 정의하는 열거형(Enum)입니다.
+<<<<<<< HEAD
+>>>>>>> parent of 80bee7b (패턴형 피하기 게임 코어 시스템 구현)
+=======
 >>>>>>> parent of 80bee7b (패턴형 피하기 게임 코어 시스템 구현)
 public enum GameState { Ready, Playing, Pause, GameOver }
 
@@ -15,9 +18,12 @@ public class GameManager : Singleton<GameManager>
 
     [Header("재화 및 점수")]
 <<<<<<< HEAD
+<<<<<<< HEAD
     public int score { get; private set; }
     public int bestScore { get; private set; }
 =======
+=======
+>>>>>>> parent of 80bee7b (패턴형 피하기 게임 코어 시스템 구현)
     // 현재 플레이 중인 게임의 점수입니다.
     public int score { get; private set; }
     // 역대 최고 점수입니다.
@@ -44,11 +50,14 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         score = 0; 
         
         bestScore = PlayerPrefs.GetInt("BestScore", 0);
         
 =======
+=======
+>>>>>>> parent of 80bee7b (패턴형 피하기 게임 코어 시스템 구현)
         // 게임 시작 시 현재 점수를 0으로 초기화합니다.
         score = 0; 
         
@@ -70,6 +79,7 @@ public class GameManager : Singleton<GameManager>
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void AddScore(int amount)
     {
         if (CurrentState != GameState.Playing) return;
@@ -79,6 +89,22 @@ public class GameManager : Singleton<GameManager>
         if (score > bestScore)
         {
             bestScore = score;
+=======
+    // 점수를 증가시키는 메서드입니다. 몬스터 처치나 아이템 획득 시 호출합니다.
+    public void AddScore(int amount)
+    {
+        // 게임이 '플레이 중(Playing)' 상태가 아니라면 점수가 오르지 않도록 막아줍니다.
+        if (CurrentState != GameState.Playing) return;
+        
+        // 점수를 추가합니다.
+        score += amount;
+
+        // 방금 획득한 점수를 더해 최고 점수를 경신했는지 확인합니다.
+        if (score > bestScore)
+        {
+            bestScore = score;
+            // 경신된 최고 점수를 기기에 바로 저장하여 게임을 껐다 켜도 유지되게 합니다.
+>>>>>>> parent of 80bee7b (패턴형 피하기 게임 코어 시스템 구현)
 =======
     // 점수를 증가시키는 메서드입니다. 몬스터 처치나 아이템 획득 시 호출합니다.
     public void AddScore(int amount)
