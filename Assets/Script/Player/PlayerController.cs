@@ -46,7 +46,12 @@ public class PlayerController : MonoBehaviour
 
         moveInput = Input.GetAxisRaw("Horizontal"); // 기본 Input Manager: A/D, 좌우 화살표        
         animator.SetBool("Running", (moveInput != 0f));
-        renderer.flipX = (moveInput < 0)  ? true : false;
+        if(moveInput < 0){
+            renderer.flipX = true;
+        } else if (moveInput > 0)
+        {
+            renderer.flipX = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

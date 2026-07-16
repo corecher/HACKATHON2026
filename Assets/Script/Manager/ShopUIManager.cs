@@ -126,6 +126,12 @@ public class ShopUIManager : MonoBehaviour
             destructionCostText.text = $"{GameManager.Instance.CostDestruction} 코인";
             destructionBuyButton.interactable = true;
         }
+        if(GameManager.Instance.destructionLevel == 0)
+        {
+            destructionLevelText.text = $"몽유 조작\n(Lv.{GameManager.Instance.destructionLevel}/5)\n구매시 공격가능";
+            destructionCostText.text = $"{GameManager.Instance.CostDestruction} 코인";
+            destructionBuyButton.interactable = true;
+        }
         // 3. 단련 정보 갱신 (만렙 5)
         if (GameManager.Instance.fortitudeLevel >= 5)
         {

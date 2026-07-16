@@ -957,7 +957,7 @@ MonoBehaviour:
   baseInterval: 2.5
   minInterval: 0.8
   survivalTickInterval: 1
-  clearTime: 360
+  clearTime: 180
   lockPlayerInputOnClear: 1
   overlapWindowDuration: 60
   overlapChance: 0.4
