@@ -51,6 +51,7 @@ namespace CardGameTemplate.Deck
         /// <summary>Fisher-Yates 알고리즘으로 덱을 무작위로 섞는다</summary>
         public void Shuffle()
         {
+            // 뒤에서부터 앞으로 훑으며 각 위치를 아직 안 섞인 범위(0~i) 중 무작위 위치와 교환 - 편향 없이 고르게 섞임
             for (int i = runtimeDeck.Count - 1; i > 0; i--)
             {
                 int j = Random.Range(0, i + 1);
@@ -63,6 +64,7 @@ namespace CardGameTemplate.Deck
         {
             List<CardData> drawn = new List<CardData>();
 
+            // 리스트 맨 끝(Count-1)을 "덱의 맨 위"로 취급 - 끝에서 제거하면 앞쪽 요소들 안 밀리니 성능상 유리
             for (int i = 0; i < count && runtimeDeck.Count > 0; i++)
             {
                 int topIndex = runtimeDeck.Count - 1;

@@ -121,6 +121,7 @@ namespace CardGameTemplate.UI
         /// <summary>손패 카드 개수를 기준으로 전체 카드 위치/회전을 재계산해 적용한다</summary>
         public void RelayoutHand()
         {
+            // 카드가 추가/제거될 때마다 전체를 다시 계산해서 배치 - 카드 수가 바뀌면 중앙 정렬 기준(mid)도 바뀌므로
             int count = handCards.Count;
             for (int i = 0; i < count; i++)
             {
@@ -140,6 +141,8 @@ namespace CardGameTemplate.UI
         /// <summary>손패 슬롯 인덱스에 대응하는 로컬 위치와 회전각을 계산한다</summary>
         private (Vector3 localPos, float rotZ) ComputeSlotTransform(int index, int count)
         {
+            // 전체 카드 수의 중앙값을 기준으로 좌우 대칭이 되도록 offsetFromMid를 계산
+            // (예: 5장이면 mid=2, 카드 0,1,2,3,4의 offset은 -2,-1,0,1,2)
             float mid = (count - 1) * 0.5f;
             float offsetFromMid = index - mid;
 
@@ -147,9 +150,11 @@ namespace CardGameTemplate.UI
 
             if (!useFanLayout)
             {
+                // 부채꼴 안 쓰면 그냥 일렬로 배치
                 return (new Vector3(x, 0f, 0f), 0f);
             }
 
+            // 부채꼴 배치: 중앙에서 멀어질수록 더 많이 회전하고, 더 아래로 처지게 함 (실제 카드를 손에 쥔 모양 흉내)
             float rotZ = -offsetFromMid * fanAngleStep;
             float y = -Mathf.Abs(offsetFromMid) * fanArcHeight;
             return (new Vector3(x, y, 0f), rotZ);

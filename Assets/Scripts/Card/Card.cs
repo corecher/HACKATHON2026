@@ -80,9 +80,11 @@ namespace CardGameTemplate.Card
 
         private IEnumerator FlipRoutine(bool faceUp)
         {
+            // 카드 뒤집기를 "가로 스케일을 0까지 줄였다가 다시 늘리는" 방식으로 흉내냄 (실제 3D 회전 없이 2D에서 간단히 구현)
             float half = flipDuration * 0.5f;
             Vector3 baseScale = transform.localScale;
 
+            // 전반부: 가로 폭을 원래 크기 → 0으로 줄임 (옆에서 보면 얇아지는 것처럼 보임)
             float t = 0f;
             while (t < half)
             {
@@ -92,9 +94,11 @@ namespace CardGameTemplate.Card
                 yield return null;
             }
 
+            // 폭이 0이 된 순간(화면상 안 보이는 타이밍)에 실제로 앞/뒷면을 교체 - 전환이 눈에 띄지 않음
             transform.localScale = new Vector3(0f, baseScale.y, baseScale.z);
             ApplyFaceState(faceUp);
 
+            // 후반부: 0 → 원래 크기로 다시 넓힘
             t = 0f;
             while (t < half)
             {

@@ -75,6 +75,7 @@ namespace CardGameTemplate.DragDrop
 
         private void OnMouseDown()
         {
+            // 복귀 애니메이션 도중에 다시 잡았으면 그 애니메이션부터 취소
             if (returnRoutine != null)
             {
                 StopCoroutine(returnRoutine);
@@ -82,11 +83,13 @@ namespace CardGameTemplate.DragDrop
             }
 
             isDragging = true;
-            originPosition = transform.position;
+            originPosition = transform.position; // 드롭 실패 시 돌아갈 위치
             originParent = transform.parent;
 
+            // 마우스 클릭 지점과 카드 중심 사이의 차이를 기억해둬야, 드래그 중 카드가 마우스로 "순간이동"하지 않고
+            // 처음 잡은 지점 그대로 붙어서 따라다님
             dragOffset = transform.position - GetMouseWorldPoint();
-            sortingGroup.sortingOrder = draggingSortingOrder;
+            sortingGroup.sortingOrder = draggingSortingOrder; // 드래그 중엔 다른 카드들보다 위에 그려지게
         }
 
         private void OnMouseDrag()
@@ -108,15 +111,18 @@ namespace CardGameTemplate.DragDrop
 
             isDragging = false;
 
+            // 드로우 존의 소스 카드는 일반 존 드롭과 다른 전용 로직으로 처리
             if (isDrawSourceCard)
             {
                 HandleDrawSourceRelease();
                 return;
             }
 
+            // 카드 아래쪽 기준점과 겹치는 존을 찾아 수용 가능하면 그쪽에 카드를 넘김
             CardZoneBase targetZone = FindOverlappingZone();
             if (targetZone != null && targetZone.TryAcceptCard(card, cardView))
             {
+                // 존이 카드를 받아들였으면 손패 목록에서는 제거 (오브젝트 자체는 존이 알아서 처리)
                 if (HandManager.Instance != null)
                 {
                     HandManager.Instance.RemoveFromHand(card, destroyObject: true);
@@ -126,6 +132,7 @@ namespace CardGameTemplate.DragDrop
                 return;
             }
 
+            // 어느 존에도 못 놓였으면(빈 공간에 드롭) 원래 손패 위치로 되돌아감
             returnRoutine = StartCoroutine(ReturnToOrigin());
         }
 
@@ -144,6 +151,7 @@ namespace CardGameTemplate.DragDrop
 
         private void OnMouseEnter()
         {
+            // 드래그 중엔 호버 효과를 따로 안 줌 (이미 드래그 중이라 의미 없음)
             if (!enableHoverEffect || isDragging)
             {
                 return;
@@ -162,6 +170,7 @@ namespace CardGameTemplate.DragDrop
                 return;
             }
 
+            // 호버 진입 때 적용했던 확대/이동을 정확히 반대로 되돌림
             isHovering = false;
             sortingGroup.sortingOrder = restingSortingOrder;
             transform.localScale = baseScale;
@@ -171,6 +180,7 @@ namespace CardGameTemplate.DragDrop
         /// <summary>현재 마우스 스크린 좌표를 고정된 z값의 월드 좌표로 변환한다</summary>
         private Vector3 GetMouseWorldPoint()
         {
+            // 스크린 좌표는 z가 "카메라로부터의 거리" 개념이라, 카드가 있는 z 평면까지의 거리를 구해서 그 깊이로 변환
             Vector3 screenPoint = Input.mousePosition;
             screenPoint.z = mainCamera.WorldToScreenPoint(new Vector3(0f, 0f, dragZDepth)).z;
             return mainCamera.ScreenToWorldPoint(screenPoint);
@@ -179,11 +189,13 @@ namespace CardGameTemplate.DragDrop
         /// <summary>카드 하단 기준점과 겹치는 CardZoneBase 계열 존을 탐색한다 (PlayZone/DiscardZone 등)</summary>
         private CardZoneBase FindOverlappingZone()
         {
+            // 카드 중심이 아니라 하단 기준점(dropCheckOffset)으로 판정해야 "카드를 존 위에 놓았다"는 느낌이 자연스러움
             Vector2 checkPoint = (Vector2)transform.position + dropCheckOffset;
             Collider2D[] hits = Physics2D.OverlapCircleAll(checkPoint, dropCheckRadius, dropZoneLayerMask);
 
             foreach (Collider2D hit in hits)
             {
+                // 콜라이더가 자식 오브젝트에 있을 수도 있으니 부모 쪽까지 올라가며 CardZoneBase를 찾음
                 CardZoneBase zone = hit.GetComponentInParent<CardZoneBase>();
                 if (zone != null)
                 {
@@ -196,11 +208,13 @@ namespace CardGameTemplate.DragDrop
 
         private IEnumerator ReturnToOrigin()
         {
+            // 드래그 중엔 부모에서 잠깐 분리됐을 수도 있으니 원래 부모로 되돌려놓고 애니메이션 시작
             transform.SetParent(originParent, true);
 
             Vector3 startPos = transform.position;
             float t = 0f;
 
+            // 이징 커브를 적용해 현재 위치 → 원래 위치로 부드럽게 이동
             while (t < returnDuration)
             {
                 t += Time.deltaTime;
