@@ -84,7 +84,7 @@ public class PlayerExplosionAttack : MonoBehaviour
 
             yield return null;
         }
-
+        SoundManager.Instance.PlaySFX("폭발");
         // 이펙트 자체는 풀링 대상이 아니라 매번 새로 만들고 파괴한다.
         Destroy(effectObj);
     }

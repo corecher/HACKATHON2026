@@ -1292,8 +1292,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5715ade03564594aad4fd628a1baec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
-  defaultBgm: {fileID: 0}
-  sfxClips: []
+  defaultBgm: {fileID: 8300000, guid: b85e01467482e6144b65fef3155c7490, type: 3}
+  sfxClips:
+  - {fileID: 8300000, guid: 55a5d749c362a3644965d58751ceb405, type: 3}
 --- !u!114 &1294950404
 MonoBehaviour:
   m_ObjectHideFlags: 0

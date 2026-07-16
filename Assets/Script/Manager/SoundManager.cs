@@ -12,6 +12,10 @@ public class SoundManager : Singleton<SoundManager>
     // 해커톤용 딕셔너리 (인스펙터 등록용 대신 이름으로 빠르게 찾기용)
     public List<AudioClip> sfxClips = new List<AudioClip>();
     private Dictionary<string, AudioClip> sfxDic = new Dictionary<string, AudioClip>();
+    private void Start()
+    {
+        PlayBGM(defaultBgm);
+    }
 
     protected override void Awake()
     {
