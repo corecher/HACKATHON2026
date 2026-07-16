@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // 패턴을 랜덤하게 골라 순환 실행하고, 생존시간에 비례해 난이도를 올린다.
 public class PatternManager : Singleton<PatternManager>
@@ -71,6 +72,8 @@ public class PatternManager : Singleton<PatternManager>
                 StartRun();
             }
         }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     protected override void OnDestroy()
@@ -79,6 +82,21 @@ public class PatternManager : Singleton<PatternManager>
         if (GameManager.Instance != null)
         {
             GameManager.Instance.OnStateChanged -= HandleStateChanged;
+        }
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // 이 매니저는 DontDestroyOnLoad라 씬을 나갔다 돌아와도 그대로 살아있지만,
+    // arenaBounds/playerController는 씬이 재로드될 때마다 파괴된 옛 오브젝트를 계속 가리키게 된다.
+    // 씬이 로드될 때마다 새로 찾아 재연결하고, 이미 Playing 상태였다면 실행도 다시 시작한다.
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        playerController = FindFirstObjectByType<PlayerController>();
+        arenaBounds = ArenaBounds.Instance;
+
+        if (GameManager.Instance != null && GameManager.Instance.CurrentState == GameState.Playing)
+        {
+            StartRun();
         }
     }
 

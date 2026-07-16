@@ -23,7 +23,37 @@ public class UIManager : Singleton<UIManager>
     public float clearFadeDuration = 1f;
     public string clearNextSceneName = "PuriTestScene"; 
 
-    // --- [추가] 씬 로드 이벤트 구독 및 해제 ---
+    // 씬이 재로드될 때 파괴된 옛 오브젝트를 계속 가리키지 않도록, 최초 연결 시점의 이름을 캐싱해둔다.
+    private string readyPanelName, ingamePanelName, pausePanelName, gameOverPanelName, clearPanelName, fadeImageName;
+
+    void Start()
+    {
+        CacheOriginalNames();
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnStateChanged += UpdateUI;
+            UpdateUI(GameManager.Instance.CurrentState);
+        }
+    }
+
+    private void CacheOriginalNames()
+    {
+        if (readyPanel != null) readyPanelName = readyPanel.name;
+        if (ingamePanel != null) ingamePanelName = ingamePanel.name;
+        if (pausePanel != null) pausePanelName = pausePanel.name;
+        if (gameOverPanel != null) gameOverPanelName = gameOverPanel.name;
+        if (clearPanel != null) clearPanelName = clearPanel.name;
+        if (fadeImage != null) fadeImageName = fadeImage.name;
+    }
+
+    private void RewireIfDestroyed(ref GameObject field, string cachedName)
+    {
+        if (field != null || string.IsNullOrEmpty(cachedName)) return;
+        field = GameObject.Find(cachedName);
+    }
+
+    // --- 씬 로드 이벤트 구독 및 해제 ---
     private void OnEnable()
     {
         // 유니티의 씬 로드 이벤트에 OnSceneLoaded 메서드를 등록합니다.
@@ -36,9 +66,23 @@ public class UIManager : Singleton<UIManager>
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // --- [추가] 새로운 씬이 로드될 때마다 실행되는 함수 ---
+    // --- 새로운 씬이 로드될 때마다 실행되는 함수 ---
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // 이 매니저는 DontDestroyOnLoad라 씬을 나갔다 돌아와도 그대로 살아있지만, 패널 참조들은
+        // 파괴된 옛 씬의 오브젝트를 계속 가리키게 된다. 캐싱해둔 이름으로 새 씬에서 다시 찾아 재연결한다.
+        RewireIfDestroyed(ref readyPanel, readyPanelName);
+        RewireIfDestroyed(ref ingamePanel, ingamePanelName);
+        RewireIfDestroyed(ref pausePanel, pausePanelName);
+        RewireIfDestroyed(ref gameOverPanel, gameOverPanelName);
+        RewireIfDestroyed(ref clearPanel, clearPanelName);
+
+        if (fadeImage == null && !string.IsNullOrEmpty(fadeImageName))
+        {
+            GameObject found = GameObject.Find(fadeImageName);
+            if (found != null) fadeImage = found.GetComponent<Image>();
+        }
+
         if (fadeImage != null)
         {
             // 1. 새 씬이 켜질 때 화면이 잠깐이라도 보이는 것을 막기 위해, 즉시 완전한 불투명(Alpha = 1) 상태로 만듭니다.
@@ -51,7 +95,11 @@ public class UIManager : Singleton<UIManager>
             // 2. 부드럽게 밝아지는 페이드 인을 실행합니다.
             FadeIn(defaultFadeInDuration);
         }
+
+        // 재연결된 패널들이 현재 게임 상태와 맞는 것만 켜져 있도록 다시 맞춘다.
+        if (GameManager.Instance != null) UpdateUI(GameManager.Instance.CurrentState);
     }
+
     public void UpdateUI(GameState state)
     {
         if (readyPanel) readyPanel.SetActive(state == GameState.Ready);
