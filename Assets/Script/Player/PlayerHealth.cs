@@ -33,12 +33,11 @@ public class PlayerHealth : MonoBehaviour
         {
             GameManager.Instance.OnStateChanged += HandleStateChanged;
             lastState = GameManager.Instance.CurrentState;
-
-            if (lastState == GameState.Playing)
-            {
-                FillHearts();
-            }
         }
+
+        // 이 컴포넌트는 씬 로컬이라 씬이 로드될 때마다 새로 생성된다 - GameManager.CurrentState
+        // 타이밍에 상관없이 항상 풀피로 시작해야 이전 판의 깎인 체력을 이어받지 않는다.
+        FillHearts();
     }
 
     void OnDestroy()

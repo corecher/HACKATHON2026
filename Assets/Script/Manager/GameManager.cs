@@ -44,9 +44,15 @@ public class GameManager : Singleton<GameManager>
         // 기기에 저장되어 있는 최고 생존시간을 불러옵니다. 저장된 값이 없다면 0을 가져옵니다.
         bestSurvivalTime = PlayerPrefs.GetFloat("BestSurvivalTime", 0f);
 
+        // 상점 강화 레벨도 영구 저장소에서 불러옵니다 (이전엔 저장 자체를 안 해서 재시작하면 항상 0으로 리셋됐음).
+        destructionLevel = PlayerPrefs.GetInt("DestructionLevel", 0);
+        fortitudeLevel = PlayerPrefs.GetInt("FortitudeLevel", 0);
+        regenLevel = PlayerPrefs.GetInt("RegenLevel", 0);
+        leapLevel = PlayerPrefs.GetInt("LeapLevel", 0);
+
         // 상점 테스트를 위해 임시로 돈을 지급합니다. (실제 게임 출시 전에는 지워야 합니다)
-        money = 5000; 
-        
+        money = 5000;
+
         // 플레이어 이동 테스트를 위해 임시로 Playing 상태로 시작합니다. (테스트 끝나면 Ready로 되돌릴 것)
         ChangeState(GameState.Playing);
     }
@@ -94,6 +100,7 @@ public class GameManager : Singleton<GameManager>
             money -= CostDestruction;
             // 파괴력 레벨을 1 올립니다.
             destructionLevel++;
+            PlayerPrefs.SetInt("DestructionLevel", destructionLevel);
             // 구매에 성공했으므로 true를 반환합니다.
             return true;
         }
@@ -109,10 +116,11 @@ public class GameManager : Singleton<GameManager>
         {
             money -= CostFortitude;
             fortitudeLevel++;
+            PlayerPrefs.SetInt("FortitudeLevel", fortitudeLevel);
             return true;
         }
         // 만렙에 도달했거나 돈이 부족하면 구매 실패(false) 처리합니다.
-        return false; 
+        return false;
     }
 
     // 재생력 강화 구매 시도
@@ -123,6 +131,7 @@ public class GameManager : Singleton<GameManager>
         {
             money -= CostRegen;
             regenLevel++;
+            PlayerPrefs.SetInt("RegenLevel", regenLevel);
             return true;
         }
         return false;
@@ -136,6 +145,7 @@ public class GameManager : Singleton<GameManager>
         {
             money -= CostLeap;
             leapLevel++;
+            PlayerPrefs.SetInt("LeapLevel", leapLevel);
             return true;
         }
         return false;

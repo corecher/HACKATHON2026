@@ -198,7 +198,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61227415}
   m_CullTransparentMesh: 1
---- !u!1 &81083645
+--- !u!1 &427718223
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,67 +206,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 81083647}
-  - component: {fileID: 81083646}
-  m_Layer: 0
-  m_Name: DropPattern
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &81083646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81083645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0856e8c671064b87b9bc593ecf54c56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DropPattern
-  unlockTime: 15
-  dangerZonePoolName: DangerZone
-  hazardPoolName: FallingHazard
-  baseBlockCount: 5
-  maxBlockCount: 9
-  blockSize: {x: 1, y: 1}
-  baseFallSpeed: 9
-  maxFallSpeed: 10.35
-  spawnInterval: 0.35
-  lingerAfterLandDuration: 0.3
-  baseWarnTime: 0.7
-  maxWarnTime: 0.45
-  minWarnTime: 0.4
-  minXSeparation: 2
-  placementAttempts: 20
---- !u!4 &81083647
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81083645}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1379475806}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &360753974
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 360753976}
-  - component: {fileID: 360753975}
+  - component: {fileID: 427718225}
+  - component: {fileID: 427718224}
   m_Layer: 0
   m_Name: ObstacleRushPattern
   m_TagString: Untagged
@@ -274,13 +215,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &360753975
+--- !u!114 &427718224
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360753974}
+  m_GameObject: {fileID: 427718223}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7cfe1e19724b46cf9e2eafdd278c22c, type: 3}
@@ -297,13 +238,13 @@ MonoBehaviour:
   baseSpeed: 7
   maxSpeed: 8.05
   spawnMargin: 1
---- !u!4 &360753976
+--- !u!4 &427718225
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360753974}
+  m_GameObject: {fileID: 427718223}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -474,6 +415,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClearResultUI
   resultText: {fileID: 61227417}
+--- !u!1 &620935267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 620935269}
+  - component: {fileID: 620935268}
+  m_Layer: 0
+  m_Name: SweepChargePattern
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &620935268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620935267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd84a61f2fcb14ae29ebd7bd8c3ec907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SweepChargePattern
+  unlockTime: 45
+  dangerZonePoolName: DangerZone
+  hazardPoolName: SweepHazard
+  hazardWidth: 2.5
+  hazardHeight: 2
+  riseTime: 0.2
+  baseHoverTime: 0.6
+  maxHoverTime: 0.35
+  minHoverTime: 0.35
+  baseSweepSpeed: 9
+  maxSweepSpeed: 10.35
+  baseWarnTime: 0.7
+  maxWarnTime: 0.45
+  minWarnTime: 0.4
+--- !u!4 &620935269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620935267}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1379475806}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &702634794
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,69 +686,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &781472473
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 781472475}
-  - component: {fileID: 781472474}
-  m_Layer: 0
-  m_Name: PillarPattern
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &781472474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781472473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 231f9c4e1e8254c658ef387fadedc8ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PillarPattern
-  unlockTime: 30
-  dangerZonePoolName: DangerZone
-  hazardPoolName: RisingHazard
-  basePillarCount: 3
-  maxPillarCount: 6
-  pillarWidth: 1
-  fallbackPlayerHeight: 1
-  lowPillarChance: 0.3
-  tallHeightMultiplierMin: 1.5
-  tallHeightMultiplierMax: 2.5
-  lowHeightMultiplierMin: 0.5
-  lowHeightMultiplierMax: 0.9
-  riseDuration: 0.2
-  holdDuration: 0.6
-  fallDuration: 0.2
-  activationInterval: 0.4
-  baseWarnTime: 0.9
-  maxWarnTime: 0.5
-  minWarnTime: 0.4
---- !u!4 &781472475
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781472473}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1379475806}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &810301524
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,7 +717,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1813652912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1043375086
+--- !u!1 &1191517081
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -789,8 +725,71 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1043375088}
-  - component: {fileID: 1043375087}
+  - component: {fileID: 1191517083}
+  - component: {fileID: 1191517082}
+  m_Layer: 0
+  m_Name: PillarPattern
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1191517082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191517081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231f9c4e1e8254c658ef387fadedc8ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PillarPattern
+  unlockTime: 30
+  dangerZonePoolName: DangerZone
+  hazardPoolName: RisingHazard
+  basePillarCount: 3
+  maxPillarCount: 6
+  pillarWidth: 1
+  fallbackPlayerHeight: 1
+  lowPillarChance: 0.3
+  tallHeightMultiplierMin: 1.5
+  tallHeightMultiplierMax: 2.5
+  lowHeightMultiplierMin: 0.5
+  lowHeightMultiplierMax: 0.9
+  riseDuration: 0.2
+  holdDuration: 0.6
+  fallDuration: 0.2
+  activationInterval: 0.4
+  baseWarnTime: 0.9
+  maxWarnTime: 0.5
+  minWarnTime: 0.4
+--- !u!4 &1191517083
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191517081}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1379475806}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1294102774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1294102776}
+  - component: {fileID: 1294102775}
   m_Layer: 0
   m_Name: SplitBurstPattern
   m_TagString: Untagged
@@ -798,13 +797,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1043375087
+--- !u!114 &1294102775
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1043375086}
+  m_GameObject: {fileID: 1294102774}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e838cd16fe7a04f129045a351867dcb4, type: 3}
@@ -826,13 +825,13 @@ MonoBehaviour:
   maxFragmentSpeed: 6.9
   fragmentLifetime: 1.2
   fragmentSize: {x: 0.5, y: 0.5}
---- !u!4 &1043375088
+--- !u!4 &1294102776
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1043375086}
+  m_GameObject: {fileID: 1294102774}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -872,11 +871,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PatternManager
   arenaBounds: {fileID: 1770894691}
   patterns:
-  - {fileID: 360753975}
-  - {fileID: 781472474}
-  - {fileID: 81083646}
-  - {fileID: 1605789634}
-  - {fileID: 1043375087}
+  - {fileID: 427718224}
+  - {fileID: 1191517082}
+  - {fileID: 1821440006}
+  - {fileID: 620935268}
+  - {fileID: 1294102775}
   levelDuration: 60
   maxLevel: 6
   baseInterval: 2.5
@@ -901,11 +900,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 360753976}
-  - {fileID: 781472475}
-  - {fileID: 81083647}
-  - {fileID: 1605789635}
-  - {fileID: 1043375088}
+  - {fileID: 427718225}
+  - {fileID: 1191517083}
+  - {fileID: 1821440007}
+  - {fileID: 620935269}
+  - {fileID: 1294102776}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1558866708
@@ -1045,64 +1044,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!1 &1605789633
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1605789635}
-  - component: {fileID: 1605789634}
-  m_Layer: 0
-  m_Name: SweepChargePattern
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1605789634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605789633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd84a61f2fcb14ae29ebd7bd8c3ec907, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SweepChargePattern
-  unlockTime: 45
-  dangerZonePoolName: DangerZone
-  hazardPoolName: SweepHazard
-  hazardWidth: 2.5
-  hazardHeight: 2
-  riseTime: 0.2
-  baseHoverTime: 0.6
-  maxHoverTime: 0.35
-  minHoverTime: 0.35
-  baseSweepSpeed: 9
-  maxSweepSpeed: 10.35
-  baseWarnTime: 0.7
-  maxWarnTime: 0.45
-  minWarnTime: 0.4
---- !u!4 &1605789635
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605789633}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1379475806}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1692323442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,6 +1214,7 @@ GameObject:
   - component: {fileID: 1813652909}
   - component: {fileID: 1813652908}
   - component: {fileID: 1813652913}
+  - component: {fileID: 1813652914}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1465,6 +1407,84 @@ MonoBehaviour:
   invincibleDuration: 1.5
   blinkInterval: 0.1
   spriteRenderer: {fileID: 1813652911}
+--- !u!114 &1813652914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813652907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e369175222ce345859a3c441a22e7873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerExplosionAttack
+  cooldownTime: 3
+  baseMaxRadius: 2
+  radiusPerLevel: 0.5
+  burstDuration: 0.2
+  effectSprite: {fileID: -6231044458718751821, guid: f5033a056413445958eb6d5f09b98212, type: 3}
+  effectColor: {r: 1, g: 0.8, b: 0.2, a: 0.6}
+  effectSortingOrder: 20
+--- !u!1 &1821440005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1821440007}
+  - component: {fileID: 1821440006}
+  m_Layer: 0
+  m_Name: DropPattern
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1821440006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821440005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0856e8c671064b87b9bc593ecf54c56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DropPattern
+  unlockTime: 15
+  dangerZonePoolName: DangerZone
+  hazardPoolName: FallingHazard
+  baseBlockCount: 5
+  maxBlockCount: 9
+  blockSize: {x: 1, y: 1}
+  baseFallSpeed: 9
+  maxFallSpeed: 10.35
+  spawnInterval: 0.35
+  lingerAfterLandDuration: 0.3
+  baseWarnTime: 0.7
+  maxWarnTime: 0.45
+  minWarnTime: 0.4
+  minXSeparation: 2
+  placementAttempts: 20
+--- !u!4 &1821440007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821440005}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1379475806}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2000000010
 GameObject:
   m_ObjectHideFlags: 0

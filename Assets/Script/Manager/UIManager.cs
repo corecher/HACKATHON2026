@@ -135,7 +135,11 @@ public class UIManager : Singleton<UIManager>
 
     public void FadeOut(float duration, Action onComplete = null)
     {
-        if (fadeImage == null) return;
+        if (fadeImage == null)
+        {
+            onComplete?.Invoke();
+            return;
+        }
         if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
 
         fadeImage.raycastTarget = true; 

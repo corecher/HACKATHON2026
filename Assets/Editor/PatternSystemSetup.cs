@@ -34,6 +34,9 @@ public static class PatternSystemSetup
         SetupPatternManager(arenaBounds);
         SetupClearUI();
 
+        Sprite circleSprite = GetOrCreateCircleSprite();
+        SetupPlayerExplosionAttack(circleSprite);
+
         Scene scene = EditorSceneManager.GetActiveScene();
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene);
@@ -68,6 +71,60 @@ public static class PatternSystemSetup
         importer.SaveAndReimport();
 
         return AssetDatabase.LoadAssetAtPath<Sprite>(path);
+    }
+
+    private static Sprite GetOrCreateCircleSprite()
+    {
+        string path = GeneratedFolder + "/circle.png";
+        Sprite existing = AssetDatabase.LoadAssetAtPath<Sprite>(path);
+        if (existing != null) return existing;
+
+        EnsureFolder(GeneratedFolder);
+
+        const int size = 32;
+        Texture2D tex = new Texture2D(size, size);
+        Vector2 center = new Vector2(size / 2f, size / 2f);
+        float radius = size / 2f;
+        Color[] pixels = new Color[size * size];
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                float dist = Vector2.Distance(new Vector2(x + 0.5f, y + 0.5f), center);
+                pixels[y * size + x] = dist <= radius ? Color.white : new Color(1f, 1f, 1f, 0f);
+            }
+        }
+        tex.SetPixels(pixels);
+        tex.Apply();
+        File.WriteAllBytes(path, tex.EncodeToPNG());
+        Object.DestroyImmediate(tex);
+
+        AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
+
+        TextureImporter importer = (TextureImporter)AssetImporter.GetAtPath(path);
+        importer.textureType = TextureImporterType.Sprite;
+        importer.spritePixelsPerUnit = size; // 텍스처 크기 = 스케일 1일 때 1유닛짜리 스프라이트
+        importer.filterMode = FilterMode.Bilinear;
+        importer.alphaIsTransparency = true;
+        importer.SaveAndReimport();
+
+        return AssetDatabase.LoadAssetAtPath<Sprite>(path);
+    }
+
+    private static void SetupPlayerExplosionAttack(Sprite circleSprite)
+    {
+        PlayerController player = Object.FindFirstObjectByType<PlayerController>();
+        if (player == null)
+        {
+            Debug.LogWarning("[PatternSystemSetup] PlayerController 없음, PlayerExplosionAttack 스킵");
+            return;
+        }
+
+        PlayerExplosionAttack attack = player.GetComponent<PlayerExplosionAttack>();
+        if (attack == null) attack = player.gameObject.AddComponent<PlayerExplosionAttack>();
+
+        attack.effectSprite = circleSprite;
+        EditorUtility.SetDirty(player.gameObject);
     }
 
     private static GameObject GetOrCreatePrefab(string name, Sprite sprite, Color color, System.Type scriptType, bool isHazard)
