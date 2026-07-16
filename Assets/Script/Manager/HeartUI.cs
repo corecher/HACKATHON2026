@@ -15,8 +15,13 @@ public class HeartUI : MonoBehaviour
 
     private readonly List<Image> heartIcons = new List<Image>();
 
-    void Start()
+    void OnEnable()
     {
+        if (playerHealth == null)
+        {
+            playerHealth = FindFirstObjectByType<PlayerHealth>();
+        }
+
         if (playerHealth != null)
         {
             playerHealth.OnHeartsChanged += UpdateHearts;
@@ -24,7 +29,7 @@ public class HeartUI : MonoBehaviour
         }
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         if (playerHealth != null)
         {

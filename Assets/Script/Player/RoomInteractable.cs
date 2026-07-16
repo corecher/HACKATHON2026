@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class RoomInteractable : MonoBehaviour
 {
@@ -49,7 +50,11 @@ public class RoomInteractable : MonoBehaviour
     {
         isTransitioning = true;
         SetPrompt(false);
+        StartCoroutine(CoTransition());
+    }
 
+    private IEnumerator CoTransition()
+    {
         if (GameManager.Instance != null)
         {
             GameManager.Instance.ChangeState(GameState.Playing);
@@ -58,8 +63,8 @@ public class RoomInteractable : MonoBehaviour
         UIManager uiManager = FindFirstObjectByType<UIManager>();
         if (uiManager != null)
         {
-            uiManager.FadeOut(fadeOutDuration, () => SceneManager.LoadScene(targetSceneName));
-            return;
+            uiManager.FadeOut(fadeOutDuration);
+            yield return new WaitForSecondsRealtime(fadeOutDuration);
         }
 
         SceneManager.LoadScene(targetSceneName);

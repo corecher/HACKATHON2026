@@ -53,6 +53,46 @@ public class UIManager : Singleton<UIManager>
         field = GameObject.Find(cachedName);
     }
 
+    private Image FindSceneImageByName(Scene scene, string imageName)
+    {
+        if (string.IsNullOrEmpty(imageName)) return null;
+
+        foreach (GameObject root in scene.GetRootGameObjects())
+        {
+            Image found = FindImageInChildren(root.transform, imageName);
+            if (found != null) return found;
+        }
+
+        return null;
+    }
+
+    private Image FindImageInChildren(Transform parent, string imageName)
+    {
+        if (parent.name == imageName && parent.TryGetComponent(out Image image))
+        {
+            return image;
+        }
+
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            Image found = FindImageInChildren(parent.GetChild(i), imageName);
+            if (found != null) return found;
+        }
+
+        return null;
+    }
+
+    private void HideFadeImage(Image image)
+    {
+        if (image == null) return;
+
+        Color color = image.color;
+        color.a = 0f;
+        image.color = color;
+        image.raycastTarget = false;
+        image.gameObject.SetActive(false);
+    }
+
     // --- 씬 로드 이벤트 구독 및 해제 ---
     private void OnEnable()
     {
@@ -77,7 +117,13 @@ public class UIManager : Singleton<UIManager>
         RewireIfDestroyed(ref gameOverPanel, gameOverPanelName);
         RewireIfDestroyed(ref clearPanel, clearPanelName);
 
-        if (fadeImage == null && !string.IsNullOrEmpty(fadeImageName))
+        Image sceneFadeImage = FindSceneImageByName(scene, fadeImageName);
+        if (sceneFadeImage != null && sceneFadeImage != fadeImage)
+        {
+            HideFadeImage(fadeImage);
+            fadeImage = sceneFadeImage;
+        }
+        else if (fadeImage == null && !string.IsNullOrEmpty(fadeImageName))
         {
             GameObject found = GameObject.Find(fadeImageName);
             if (found != null) fadeImage = found.GetComponent<Image>();

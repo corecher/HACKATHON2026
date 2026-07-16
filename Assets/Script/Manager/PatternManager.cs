@@ -201,9 +201,6 @@ public class PatternManager : Singleton<PatternManager>
 
         if (lockPlayerInputOnClear && playerController != null) playerController.enabled = false;
 
-        // 클리어 최초 달성 여부만 기록해둔다 (재클리어 UI 노출은 이번 범위 밖).
-        PlayerPrefs.SetInt("HasCleared", 1);
-
         OnGameClear?.Invoke();
         GameManager.Instance?.ChangeState(GameState.Clear);
     }
